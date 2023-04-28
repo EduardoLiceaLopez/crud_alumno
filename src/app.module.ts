@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     driver: ApolloDriver,
     autoSchemaFile: join(process.cwd(), 'scr/schema.gql'),
     sortSchema: true,
+
   }), 
   TypeOrmModule.forRoot({
     type: 'mysql',
@@ -20,7 +21,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'info05e'
+    password: 'liceedu12',
+    autoLoadEntities: true,
+    synchronize: false,
   }) , 
   AlumnosModule],
   controllers: [AppController],

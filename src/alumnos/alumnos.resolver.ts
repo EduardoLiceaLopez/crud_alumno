@@ -1,14 +1,15 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Scalar } from '@nestjs/graphql';
 import { AlumnosService } from './alumnos.service';
 import { Alumno } from './entities/alumno.entity';
 import { CreateAlumnoInput } from './dto/create-alumno.input';
 import { UpdateAlumnoInput } from './dto/update-alumno.input';
+import { Any } from 'typeorm';
 
 @Resolver(() => Alumno)
 export class AlumnosResolver {
   constructor(private readonly alumnosService: AlumnosService) {}
 
-  @Mutation(() => Alumno)
+  @Mutation(() => Alumno, {name: 'crearAlumno'})
   createAlumno(@Args('createAlumnoInput') createAlumnoInput: CreateAlumnoInput) {
     return this.alumnosService.create(createAlumnoInput);
   }
@@ -23,13 +24,13 @@ export class AlumnosResolver {
     return this.alumnosService.findOne(id);
   }
 
-  @Mutation(() => Alumno)
+  @Mutation(() => Alumno, {name: 'actualizarAlumno'})
   updateAlumno(@Args('updateAlumnoInput') updateAlumnoInput: UpdateAlumnoInput) {
     return this.alumnosService.update(updateAlumnoInput.id, updateAlumnoInput);
   }
 
-  @Mutation(() => Alumno)
-  removeAlumno(@Args('id', { type: () => Int }) id: number) {
+  @Mutation(()=> Boolean)
+  removeAlumno(@Args('id', { type: () => Int }) id: number): Promise<any> {
     return this.alumnosService.remove(id);
   }
 }

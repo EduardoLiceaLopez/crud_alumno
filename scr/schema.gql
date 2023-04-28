@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Alumno {
+  apmaterno: String!
+  appaterno: String!
+  idalumno: Int!
+  noalumno: String!
+  nocta: Int!
+}
+
+input CreateAlumnoInput {
+  apmaterno: String!
+  appaterno: String!
+  idalumno: Int!
+  noalumno: String!
+  nocta: Int!
+}
+
+type Mutation {
+  actualizarAlumno(updateAlumnoInput: UpdateAlumnoInput!): Alumno!
+  crearAlumno(createAlumnoInput: CreateAlumnoInput!): Alumno!
+  removeAlumno(id: Int!): Boolean!
+}
+
+type Query {
+  alumno(id: Int!): Alumno!
+  alumnos: [Alumno!]!
+}
+
+input UpdateAlumnoInput {
+  apmaterno: String
+  appaterno: String
+  id: Int!
+  idalumno: Int
+  noalumno: String
+  nocta: Int
+}
